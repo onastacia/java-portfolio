@@ -35,7 +35,6 @@ public class Variable implements AllInterfaceExpression {
         }
     }
 
-    // :NOTE: не эффективно
     @Override
     public int evaluate(List<Integer> list) {
         return list.get(variableInt);
