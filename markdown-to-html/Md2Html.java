@@ -82,7 +82,6 @@ public class Md2Html {
         return resTransmitted.indexEnd();
     }
 
-    //all without paragraph and header
     private static Refund push(String str, int startIndex, String symStop) {
         String stringChange = str; // :NOTE: нейминг
         StringBuilder sbHtml = new StringBuilder();
@@ -96,7 +95,6 @@ public class Md2Html {
                 }
             }
 
-            // :NOTE: copy-paste
             switch (sym) {
                 case ('<') -> sbHtml.append("&lt;");
                 case ('>') -> sbHtml.append("&gt;");

@@ -15,17 +15,16 @@ public class MyScanner implements AutoCloseable {
 
     public int pointerString = 1;
 
-    //    public boolean flag = false;
     private final Reader reader;
     private final char[] buffer = new char[BUFFER_SIZE];
 
     private int readChars = 0;
 
-    public MyScanner(InputStream inputStream) throws IOException {              // констурктор для потока
+    public MyScanner(InputStream inputStream) throws IOException {
         this.reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
     }
 
-    public MyScanner(File fileName) throws FileNotFoundException {                // конструктор для файла
+    public MyScanner(File fileName) throws FileNotFoundException {
         this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
     }
 
@@ -43,7 +42,7 @@ public class MyScanner implements AutoCloseable {
         return pointerString;
     }
 
-    public String nextPredic(Predicate<Character> pred) throws IOException {                        // метод nextPre()
+    public String nextPredict(Predicate<Character> pred) throws IOException {
         StringBuilder token = new StringBuilder();
         while (readChars != -1) {
             if (pointer >= readChars) {
@@ -77,7 +76,7 @@ public class MyScanner implements AutoCloseable {
         }
     }
 
-    public boolean hasNextPred(Predicate<Character> pred) throws IOException {             //метод hasNext()
+    public boolean hasNextPred(Predicate<Character> pred) throws IOException {
         while (pointer >= readChars) {
             fillBuffer();
             if (readChars == -1) return false;
@@ -98,72 +97,7 @@ public class MyScanner implements AutoCloseable {
         return false;
     }
 
-
-//    public String nextPredic(Predicate<Character> pred) throws IOException {                        // метод nextPre()
-//        StringBuilder token = new StringBuilder();
-//        flag = false;
-//        int lenLinSep = 0;
-//        while (readChars != -1) {
-//            if (pointer >= readChars) {
-//                fillBuffer();
-//                if (readChars == -1) {
-//                    if (!token.isEmpty()) {
-//                        return token.toString();
-//                    } else {
-//                        continue;
-//                    }
-//                }
-//            }
-//            char sym = buffer[pointer++];
-//            if (pred.test(sym) && lenLinSep == 0) {
-//                token.append(sym);
-//            } else {
-//                if (sym == LINE_SEPARATOR.charAt(lenLinSep)) {
-//                    lenLinSep++;
-//                    if (lenLinSep == LINE_SEPARATOR.length()) {
-//                        flag = true;
-//                        if (!token.isEmpty()) {
-//                            return token.toString();
-//                        } else {
-//                            lenLinSep = 0;
-//                        }
-//                    }
-//                } else {
-//                    if (lenLinSep > 0) {
-//                        token.append(LINE_SEPARATOR, 0, lenLinSep);
-//                        lenLinSep = 0;
-//                    } else {
-//                        if (!token.isEmpty()) {
-//                            return token.toString();
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
-//        flag = true;
-//        return null;
-//    }
-
-
-//    public boolean hasNextPred(Predicate<Character> pred) throws IOException {             //метод hasNext()
-//        while (pointer >= readChars) {
-//            fillBuffer();
-//            if (readChars == -1) return false;
-//        }
-//        while (pointer < readChars) {
-//            if (pred.test(buffer[pointer])) return true;
-//            else pointer++;
-//
-//            if (pointer >= readChars) {
-//                fillBuffer();
-//                if (readChars == -1) return false;
-//            }
-//        }
-//        return false;
-//    }
-
-    public String next() throws IOException {                        // метод next()
+    public String next() throws IOException {
         StringBuilder token = new StringBuilder();
         int lenLinSep = 0;
         while (readChars != -1) {
@@ -191,7 +125,7 @@ public class MyScanner implements AutoCloseable {
         return token.toString();
     }
 
-    public int nextInt() throws IOException {                        // метод nextInt()
+    public int nextInt() throws IOException {
         String strTest = next();
         int res;
         if (strTest == null) {
@@ -209,7 +143,7 @@ public class MyScanner implements AutoCloseable {
     }
 
 
-    public String nextLine() throws IOException {                        // метод nextLine()
+    public String nextLine() throws IOException {
         StringBuilder token = new StringBuilder();
         int lenLinSep = 0;
         while (readChars != -1) {
@@ -239,7 +173,7 @@ public class MyScanner implements AutoCloseable {
     }
 
 
-    public boolean hasNext() throws IOException {             //метод hasNext()
+    public boolean hasNext() throws IOException {
         while (pointer >= readChars) {
             fillBuffer();
             if (readChars == -1) return false;
@@ -256,7 +190,7 @@ public class MyScanner implements AutoCloseable {
         return false;
     }
 
-    public boolean hasNextLine() throws IOException {                                   // метод hasNexLine()
+    public boolean hasNextLine() throws IOException {
         if (pointer < readChars) {
             return true;
         }
