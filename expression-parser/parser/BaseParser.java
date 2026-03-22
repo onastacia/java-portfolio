@@ -2,10 +2,8 @@ package expression.parser;
 
 import expression.exceptions.ParsingException;
 
-import java.util.InputMismatchException;
-
 public class BaseParser {
-    private CharSource source; // :NOTE: final
+    private final CharSource source;
     private char ch;
     protected static final char EOF = 0;
 
@@ -38,7 +36,7 @@ public class BaseParser {
         return current;
     }
 
-    private boolean take(char c) { // :NOTE: private
+    private boolean take(char c) {
         if (test(c)) {
             next();
             return true;
@@ -46,7 +44,7 @@ public class BaseParser {
         return false;
     }
 
-    protected void expect(char c) { // :NOTE: не понятно что делает функция по названию
+    protected void expect(char c) {
         if (!take(c)) {
             throw new ParsingException("Excpected " + formateChar(c) + "  but got " + formateChar(ch) + "!");
         }
@@ -56,7 +54,7 @@ public class BaseParser {
         return c == EOF ? "EOF" : "'" + c + "'";
     }
 
-    protected void expect(String chars) { // :NOTE: не понятно что делает функция по названию
+    protected void expect(String chars) {
         for (char c : chars.toCharArray()) {
             expect(c);
         }
